@@ -1,10 +1,20 @@
-<form action="/" method="POST" class="d-flex flex-column align-items-center">
-  <input class="mt-4 mb-3 w-50" type="text" class="form-control" id="url" name="url" placeholder="Input URL" required>
-  <button type="submit" class="btn btn-primary mb2">Submit</button>
-</form>
-
-{{#if isError}}
-<div class="alert alert-danger mt-3" role="alert">
-  <span class="m-2" style="color: brown;">Your URL is invalid</span>
+{{#if code}}
+<div class="d-flex flex-column align-items-center">
+  <h3>Success! use this link:</h3>
+  <p id="urlGenerated" style="color: blue">{{host}}/{{code}}</p>
+  <button class="btn btn-primary" id="copyButton" onclick="urlCopy()">Copy</button>
 </div>
+<script>
+  function urlCopy() {
+    const urlGenerated = document.getElementById("urlGenerated").innerText
+    navigator.clipboard.writeText(urlGenerated)
+      .then(() => alert("URL Copied!"))
+      .catch(error => console.log(error))
+  }
+</script>
+{{else}}
+<form class="d-flex flex-column align-items-center" action="/" method="POST">
+    <input class="mt-4 mb-3 w-50" type="url" name="url" id="url" placeholder="Input URL here" required>
+    <button class="btn btn-outline-primary" id="submitButton" type="submit">Create</button>
+</form>
 {{/if}}

@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(routes)
 
+app.use(express.static('public'))
+
 app.listen(PORT, () => {
   console.log(`App is running on http://localhost:${PORT}`)
 })
